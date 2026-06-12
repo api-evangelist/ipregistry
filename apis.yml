@@ -1,0 +1,83 @@
+aid: ipregistry
+name: IPregistry
+description: >
+  IPregistry provides a fast, reliable IP geolocation and threat intelligence REST API
+  for looking up information associated with IPv4 or IPv6 addresses and Autonomous Systems
+  (AS). The API returns location data, connection details, company and carrier information,
+  time zone, currency, and comprehensive security threat assessments from over 220 OSINT
+  threat feeds. It supports single and batch IP lookups, user-agent parsing, ASN queries,
+  and optional EU-region routing for data residency compliance. All lookups are authenticated
+  via API key and billed against prepaid credits that never expire.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/ipregistry/refs/heads/main/apis.yml
+created: '2026-06-12'
+modified: '2026-06-12'
+specificationVersion: '0.19'
+tags:
+  - IP Geolocation
+  - Threat Intelligence
+  - IP Address
+  - ASN
+  - Carrier
+  - Security
+  - Location Data
+  - User-Agent Parsing
+  - VPN Detection
+  - Proxy Detection
+apis:
+  - name: IPregistry IP Geolocation and Threat Intelligence API
+    description: >
+      A REST API that resolves IPv4/IPv6 addresses and Autonomous System Numbers to
+      rich intelligence including geolocation, ISP/carrier details, company data,
+      currency and time zone, and threat classification across VPN, proxy, TOR, bot,
+      and abuse categories. Supports single lookups, batch requests of up to 1,024 IPs,
+      user-agent parsing, and ASN lookups, with optional EU base URL for GDPR-aligned
+      data routing.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://ipregistry.co
+    baseURL: https://api.ipregistry.co
+    tags:
+      - IP Geolocation
+      - Threat Intelligence
+      - ASN
+      - Carrier
+      - VPN Detection
+      - User-Agent Parsing
+    properties:
+      - type: Documentation
+        url: https://ipregistry.co/docs
+      - type: OpenAPI
+        url: https://ipregistry.co/docs
+    contact:
+      - FN: IPregistry Support
+        url: https://ipregistry.co/docs
+        email: support@ipregistry.co
+common:
+  - type: Website
+    url: https://ipregistry.co
+  - type: Documentation
+    url: https://ipregistry.co/docs
+  - type: GitHubOrg
+    url: https://github.com/ipregistry
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/ipregistry
+  - type: Blog
+    url: https://ipregistry.co/blog
+  - type: Pricing
+    url: https://ipregistry.co/pricing
+  - type: StatusPage
+    url: https://ipregistry.co/status
+  - type: X
+    url: https://twitter.com/ipregistryco
+  - type: Changelog
+    url: https://ipregistry.co/changelog
+  - type: Plans
+    url: plans/ipregistry-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/ipregistry-rate-limits.yml
+  - type: FinOps
+    url: finops/ipregistry-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

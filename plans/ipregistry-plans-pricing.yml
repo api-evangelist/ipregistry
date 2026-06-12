@@ -1,0 +1,118 @@
+specificationVersion: '0.1'
+id: ipregistry-plans-pricing
+name: IPregistry Plans and Pricing
+description: >
+  IPregistry uses a prepaid credit model. New accounts receive 100,000 free lookup
+  credits on sign-up with no expiration and no monthly fees. Additional credits are
+  purchased in packages ranging from 50,000 to 6,000,000, providing progressively
+  lower per-credit costs. An Enterprise tier is available for high-volume workloads
+  with monthly billing and custom pricing. Credits never expire and apply to all
+  API endpoints including IP lookups, ASN queries, and user-agent parsing.
+url: https://ipregistry.co/pricing
+plans:
+  - name: Free Starter
+    description: >
+      One-time grant of 100,000 lookup credits awarded on account creation.
+      No credit card required. Credits never expire. Access to all API features
+      including geolocation, threat intelligence, and user-agent parsing.
+    url: https://dashboard.ipregistry.co/signup
+    price: 0.00
+    currency: USD
+    billingCycle: one-time
+    features:
+      - 100,000 free lookup credits (one-time)
+      - Full API feature access
+      - Company, carrier, and threat data included
+      - Batch lookup support
+      - User-agent parsing
+      - No credit card required
+    rateLimit:
+      requests: configurable
+      period: hour
+      notes: Rate limiting disabled by default; configurable per API key in dashboard
+  - name: Starter Pack
+    description: >
+      50,000 prepaid credits for $10. Suitable for small projects and development
+      use. Credits never expire. All features included. Effective rate of $0.0002
+      per lookup.
+    url: https://ipregistry.co/pricing
+    price: 10.00
+    currency: USD
+    billingCycle: one-time
+    unit: 50000 credits
+    pricePerUnit: 0.0002
+    features:
+      - 50,000 lookup credits
+      - All API features included
+      - No expiration on credits
+      - Batch lookups (up to 1,024 IPs per request)
+      - ASN lookups
+      - User-agent parsing
+  - name: Growth Pack
+    description: >
+      400,000 prepaid credits for $50. Suitable for growing applications with
+      moderate lookup volume. Effective rate of $0.000125 per lookup.
+    url: https://ipregistry.co/pricing
+    price: 50.00
+    currency: USD
+    billingCycle: one-time
+    unit: 400000 credits
+    pricePerUnit: 0.000125
+    features:
+      - 400,000 lookup credits
+      - All API features included
+      - No expiration on credits
+      - Batch lookups (up to 1,024 IPs per request)
+      - ASN lookups
+      - User-agent parsing
+  - name: Business Pack
+    description: >
+      1,000,000 prepaid credits for $100. Designed for production applications
+      with significant lookup volumes. Effective rate of $0.0001 per lookup.
+    url: https://ipregistry.co/pricing
+    price: 100.00
+    currency: USD
+    billingCycle: one-time
+    unit: 1000000 credits
+    pricePerUnit: 0.0001
+    features:
+      - 1,000,000 lookup credits
+      - All API features included
+      - No expiration on credits
+      - Batch lookups (up to 1,024 IPs per request)
+      - ASN lookups
+      - User-agent parsing
+  - name: Scale Pack
+    description: >
+      6,000,000 prepaid credits for $500. Best value for high-volume workloads.
+      Effective rate of approximately $0.0000833 per lookup.
+    url: https://ipregistry.co/pricing
+    price: 500.00
+    currency: USD
+    billingCycle: one-time
+    unit: 6000000 credits
+    pricePerUnit: 0.0000833
+    features:
+      - 6,000,000 lookup credits
+      - All API features included
+      - No expiration on credits
+      - Batch lookups (up to 1,024 IPs per request)
+      - ASN lookups
+      - User-agent parsing
+  - name: Enterprise
+    description: >
+      Custom monthly billing plan for enterprises requiring high-volume lookup
+      capacity, SLA guarantees, dedicated support, and optional offline datasets.
+      Contact IPregistry for custom pricing and terms.
+    url: https://ipregistry.co/pricing
+    price: custom
+    currency: USD
+    billingCycle: monthly
+    features:
+      - Custom volume discounts
+      - Monthly billing option
+      - Dedicated support
+      - SLA guarantees
+      - Offline dataset licensing available
+      - Custom rate limits
+      - Multiple API key management

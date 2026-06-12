@@ -1,0 +1,101 @@
+specificationVersion: '1.0'
+id: ipregistry-finops
+name: IPregistry FinOps Framework
+description: >
+  IPregistry operates on a prepaid credit consumption model where costs are directly
+  tied to API usage. Each lookup type consumes a defined number of credits, enabling
+  precise cost attribution and budget forecasting. Credits never expire, eliminating
+  wasteful monthly minimums. FinOps practitioners can control spend through dashboard-
+  configured hourly invocation limits per API key, auto-renewal thresholds, and
+  alert notifications. For high-volume workloads, the Enterprise tier offers monthly
+  billing with negotiated volume discounts.
+url: https://ipregistry.co/pricing
+provider: IPregistry
+framework: FinOps Framework 1.0 (FOCUS-aligned)
+costModel:
+  type: prepaid-credits
+  currency: USD
+  creditExpiry: never
+  billingModels:
+    - name: Prepaid Credit Packs
+      description: Purchase credit packs in advance; usage is deducted as lookups occur
+      renewalOptions:
+        - manual purchase
+        - auto-renewal at configurable balance threshold
+    - name: Enterprise Monthly
+      description: Monthly invoiced billing with negotiated high-volume discount rates
+      billingCycle: monthly
+unitCosts:
+  - unit: Single IP Lookup
+    creditsConsumed: 1
+    lowestCostUSD: 0.0000833
+    highestCostUSD: 0.0002
+    notes: Cost per lookup varies by credit pack size purchased
+  - unit: Single ASN Lookup
+    creditsConsumed: 1
+    lowestCostUSD: 0.0000833
+    highestCostUSD: 0.0002
+  - unit: Single User-Agent Parse
+    creditsConsumed: 1
+    lowestCostUSD: 0.0000833
+    highestCostUSD: 0.0002
+  - unit: Batch IP Lookup (n IPs)
+    creditsConsumed: n + 1
+    notes: Extra credit overhead per batch request; cost savings vs. n+1 individual calls
+  - unit: Batch ASN Lookup (n ASNs)
+    creditsConsumed: n + 1
+    notes: Maximum 16 ASNs per batch request
+  - unit: Batch User-Agent Parse (n strings)
+    creditsConsumed: n
+    notes: Maximum 256 user-agent strings per request
+creditPackages:
+  - credits: 100000
+    priceUSD: 0.00
+    pricePerCredit: 0.00
+    type: free-trial
+    notes: One-time new account grant; never expires
+  - credits: 50000
+    priceUSD: 10.00
+    pricePerCredit: 0.0002
+  - credits: 400000
+    priceUSD: 50.00
+    pricePerCredit: 0.000125
+  - credits: 1000000
+    priceUSD: 100.00
+    pricePerCredit: 0.0001
+  - credits: 6000000
+    priceUSD: 500.00
+    pricePerCredit: 0.0000833
+costControls:
+  - name: Hourly Invocation Limit per API Key
+    description: >
+      Configure a maximum number of requests per hour on each API key via the
+      dashboard to prevent runaway spend from bugs or abuse.
+    configurableVia: dashboard
+  - name: Balance Alert Notifications
+    description: >
+      Set low-balance alerts so teams are notified before credits are exhausted,
+      preventing unexpected service interruption.
+    configurableVia: dashboard
+  - name: Auto-Renewal
+    description: >
+      Enable automatic credit top-up at a configured threshold to ensure
+      uninterrupted service, with cost impact equal to the selected credit pack.
+    configurableVia: dashboard
+  - name: Multiple API Keys
+    description: >
+      Issue separate API keys per project or environment (dev/staging/prod) to
+      attribute costs and enforce distinct invocation limits per context.
+    configurableVia: dashboard
+  - name: IP and Origin Restrictions
+    description: >
+      Restrict API key usage to specific IP addresses or HTTP origins to prevent
+      unauthorized consumption and unintended spend.
+    configurableVia: dashboard
+costAllocation:
+  recommended:
+    - Assign one API key per application or service for per-service cost attribution
+    - Use batch endpoints to reduce per-lookup overhead (n+1 credits vs n calls)
+    - Monitor X-Rate-Limit-Remaining and credit balance via dashboard to forecast spend
+    - Evaluate EU base URL routing requirements as there is no additional cost
+    - Size credit packs to the next volume tier to achieve best per-credit rate

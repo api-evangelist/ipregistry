@@ -1,0 +1,65 @@
+specificationVersion: '0.1'
+id: ipregistry-rate-limits
+name: IPregistry Rate Limits
+description: >
+  IPregistry does not enforce hard rate limits by default. The primary constraint
+  on API usage is the credit balance on the account — each IP lookup costs one credit,
+  batch requests cost (quantity + 1) credits, and user-agent or ASN lookups each cost
+  one credit. Optional hourly invocation limits can be configured per API key through
+  the dashboard to protect against runaway usage or abuse. When throttling is enabled,
+  IPregistry implements a leaky-bucket-style algorithm that resets limits gradually
+  over each hour rather than hard-resetting at the boundary, providing smoother
+  traffic shaping and burst absorption.
+url: https://ipregistry.co/docs/throttling
+limits:
+  - name: Default Credit-Based Throttle
+    description: >
+      No hard rate limit is applied unless configured. The account's credit balance
+      is the sole constraint. Credits are consumed per lookup: 1 credit for single
+      IP, 1 credit for single ASN, 1 credit for user-agent parse, and (n+1) credits
+      for a batch of n items.
+    limit: unlimited
+    period: none
+    notes: Default behavior — rate limiting disabled out of the box
+  - name: Configurable Hourly Invocation Limit (per API key)
+    description: >
+      Each API key can optionally be assigned a maximum number of API invocations
+      per hour via the dashboard. The leaky-bucket algorithm resets limits
+      progressively throughout the hour based on elapsed time and recent usage,
+      which protects against burst spikes while remaining flexible.
+    limit: user-defined
+    period: hour
+    algorithm: leaky-bucket
+    configurableVia: dashboard
+    notes: Configurable per API key; not enforced by default
+  - name: Batch IP Lookup Cap
+    description: >
+      A single batch IP lookup request may include up to 1,024 IP addresses.
+      Each batch request costs (n + 1) credits where n is the number of IPs submitted.
+    limit: 1024
+    period: per-request
+    unit: IP addresses per batch request
+    creditFormula: n + 1 credits per batch
+  - name: Batch ASN Lookup Cap
+    description: >
+      A single batch ASN lookup request may include up to 16 Autonomous System
+      Numbers. Each batch request costs (n + 1) credits.
+    limit: 16
+    period: per-request
+    unit: ASNs per batch request
+    creditFormula: n + 1 credits per batch
+  - name: Batch User-Agent Parsing Cap
+    description: >
+      A single user-agent parsing request may include up to 256 user-agent strings.
+    limit: 256
+    period: per-request
+    unit: user-agent strings per batch request
+headers:
+  - name: X-Rate-Limit-Limit
+    description: Maximum number of API invocations permitted in the current window (when throttling is enabled)
+  - name: X-Rate-Limit-Remaining
+    description: Number of API invocations remaining in the current window (when throttling is enabled)
+  - name: X-Rate-Limit-Reset
+    description: Seconds until the current rate-limit window resets (when throttling is enabled)
+  - name: Retry-After
+    description: Seconds to wait before retrying after being throttled (when throttling is enabled)
