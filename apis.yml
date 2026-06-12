@@ -78,6 +78,10 @@ common:
     url: rate-limits/ipregistry-rate-limits.yml
   - type: FinOps
     url: finops/ipregistry-finops.yml
+  - type: BlogIndex
+    url: blogs/blogs.json
+  - type: JSONLDContext
+    url: json-ld/ipregistry-context.jsonld
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

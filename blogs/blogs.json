@@ -1,0 +1,26 @@
+{
+  "name": "IPregistry Blog",
+  "description": "Official blog for IPregistry covering IP geolocation, threat intelligence, DNS, and related topics.",
+  "url": "https://ipregistry.co/blog",
+  "rss": null,
+  "rss_confirmed": false,
+  "notes": "No RSS or Atom feed URL discovered on the blog page or via common feed paths (/blog/rss, /blog/feed, /feed, /blog/rss.xml). The blog is a static/custom site with no discoverable machine-readable feed.",
+  "last_checked": "2026-06-12",
+  "posts": [
+    {
+      "title": "Wikimedia's Public DNS Resolver",
+      "url": "https://ipregistry.co/blog/wikimedia-public-dns-resolver",
+      "date": "2024-08-09"
+    },
+    {
+      "title": "OpenDNS No Longer Accessible in France",
+      "url": "https://ipregistry.co/blog/opendns-no-longer-accessible-in-france",
+      "date": "2024-06-28"
+    },
+    {
+      "title": "What is a Geofeed? How to Set Up One?",
+      "url": "https://ipregistry.co/blog/geofeeds",
+      "date": "2024-04-03"
+    }
+  ]
+}

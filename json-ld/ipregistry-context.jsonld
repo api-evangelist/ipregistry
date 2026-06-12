@@ -1,0 +1,327 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ipregistry": "https://ipregistry.co/docs#",
+
+    "IPGeolocation": "schema:GeoCoordinates",
+    "ThreatIntelligence": "schema:Thing",
+    "AutonomousSystem": "schema:Organization",
+    "UserAgent": "schema:SoftwareApplication",
+
+    "ip": {
+      "@id": "ipregistry:ip",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "ipregistry:type",
+      "@type": "xsd:string"
+    },
+
+    "carrier": {
+      "@id": "ipregistry:carrier",
+      "@type": "@id"
+    },
+    "carrier_name": {
+      "@id": "ipregistry:carrier_name",
+      "@type": "xsd:string"
+    },
+    "carrier_mcc": {
+      "@id": "ipregistry:carrier_mcc",
+      "@type": "xsd:string"
+    },
+    "carrier_mnc": {
+      "@id": "ipregistry:carrier_mnc",
+      "@type": "xsd:string"
+    },
+
+    "company": {
+      "@id": "ipregistry:company",
+      "@type": "@id"
+    },
+    "company_domain": {
+      "@id": "ipregistry:company_domain",
+      "@type": "xsd:string"
+    },
+    "company_name": {
+      "@id": "ipregistry:company_name",
+      "@type": "xsd:string"
+    },
+    "company_type": {
+      "@id": "ipregistry:company_type",
+      "@type": "xsd:string"
+    },
+
+    "connection": {
+      "@id": "ipregistry:connection",
+      "@type": "@id"
+    },
+    "connection_asn": {
+      "@id": "ipregistry:connection_asn",
+      "@type": "xsd:integer"
+    },
+    "connection_domain": {
+      "@id": "ipregistry:connection_domain",
+      "@type": "xsd:string"
+    },
+    "connection_organization": {
+      "@id": "ipregistry:connection_organization",
+      "@type": "xsd:string"
+    },
+    "connection_route": {
+      "@id": "ipregistry:connection_route",
+      "@type": "xsd:string"
+    },
+    "connection_type": {
+      "@id": "ipregistry:connection_type",
+      "@type": "xsd:string"
+    },
+
+    "currency": {
+      "@id": "ipregistry:currency",
+      "@type": "@id"
+    },
+    "currency_code": {
+      "@id": "schema:currenciesAccepted",
+      "@type": "xsd:string"
+    },
+    "currency_name": {
+      "@id": "ipregistry:currency_name",
+      "@type": "xsd:string"
+    },
+    "currency_symbol": {
+      "@id": "ipregistry:currency_symbol",
+      "@type": "xsd:string"
+    },
+
+    "location": {
+      "@id": "ipregistry:location",
+      "@type": "@id"
+    },
+    "continent_code": {
+      "@id": "ipregistry:continent_code",
+      "@type": "xsd:string"
+    },
+    "continent_name": {
+      "@id": "ipregistry:continent_name",
+      "@type": "xsd:string"
+    },
+    "country_code": {
+      "@id": "schema:addressCountry",
+      "@type": "xsd:string"
+    },
+    "country_name": {
+      "@id": "ipregistry:country_name",
+      "@type": "xsd:string"
+    },
+    "region_code": {
+      "@id": "ipregistry:region_code",
+      "@type": "xsd:string"
+    },
+    "region_name": {
+      "@id": "ipregistry:region_name",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "schema:addressLocality",
+      "@type": "xsd:string"
+    },
+    "postal": {
+      "@id": "schema:postalCode",
+      "@type": "xsd:string"
+    },
+    "latitude": {
+      "@id": "schema:latitude",
+      "@type": "xsd:decimal"
+    },
+    "longitude": {
+      "@id": "schema:longitude",
+      "@type": "xsd:decimal"
+    },
+    "in_eu": {
+      "@id": "ipregistry:in_eu",
+      "@type": "xsd:boolean"
+    },
+
+    "security": {
+      "@id": "ipregistry:security",
+      "@type": "@id"
+    },
+    "is_anonymous": {
+      "@id": "ipregistry:is_anonymous",
+      "@type": "xsd:boolean"
+    },
+    "is_abuser": {
+      "@id": "ipregistry:is_abuser",
+      "@type": "xsd:boolean"
+    },
+    "is_attacker": {
+      "@id": "ipregistry:is_attacker",
+      "@type": "xsd:boolean"
+    },
+    "is_bogon": {
+      "@id": "ipregistry:is_bogon",
+      "@type": "xsd:boolean"
+    },
+    "is_cloud_provider": {
+      "@id": "ipregistry:is_cloud_provider",
+      "@type": "xsd:boolean"
+    },
+    "is_proxy": {
+      "@id": "ipregistry:is_proxy",
+      "@type": "xsd:boolean"
+    },
+    "is_relay": {
+      "@id": "ipregistry:is_relay",
+      "@type": "xsd:boolean"
+    },
+    "is_threat": {
+      "@id": "ipregistry:is_threat",
+      "@type": "xsd:boolean"
+    },
+    "is_tor": {
+      "@id": "ipregistry:is_tor",
+      "@type": "xsd:boolean"
+    },
+    "is_tor_exit": {
+      "@id": "ipregistry:is_tor_exit",
+      "@type": "xsd:boolean"
+    },
+    "is_vpn": {
+      "@id": "ipregistry:is_vpn",
+      "@type": "xsd:boolean"
+    },
+
+    "time_zone": {
+      "@id": "ipregistry:time_zone",
+      "@type": "@id"
+    },
+    "time_zone_id": {
+      "@id": "ipregistry:time_zone_id",
+      "@type": "xsd:string"
+    },
+    "time_zone_abbreviation": {
+      "@id": "ipregistry:time_zone_abbreviation",
+      "@type": "xsd:string"
+    },
+    "time_zone_current_time": {
+      "@id": "ipregistry:time_zone_current_time",
+      "@type": "xsd:string"
+    },
+    "time_zone_offset": {
+      "@id": "ipregistry:time_zone_offset",
+      "@type": "xsd:integer"
+    },
+    "time_zone_in_daylight_saving": {
+      "@id": "ipregistry:time_zone_in_daylight_saving",
+      "@type": "xsd:boolean"
+    },
+
+    "asn": {
+      "@id": "ipregistry:asn",
+      "@type": "xsd:string"
+    },
+    "allocated": {
+      "@id": "ipregistry:allocated",
+      "@type": "xsd:dateTime"
+    },
+    "registry": {
+      "@id": "ipregistry:registry",
+      "@type": "xsd:string"
+    },
+    "prefixes": {
+      "@id": "ipregistry:prefixes",
+      "@container": "@list"
+    },
+    "cidr": {
+      "@id": "ipregistry:cidr",
+      "@type": "xsd:string"
+    },
+    "relationships": {
+      "@id": "ipregistry:relationships",
+      "@type": "@id"
+    },
+    "downstreams": {
+      "@id": "ipregistry:downstreams",
+      "@container": "@list"
+    },
+    "peers": {
+      "@id": "ipregistry:peers",
+      "@container": "@list"
+    },
+    "upstreams": {
+      "@id": "ipregistry:upstreams",
+      "@container": "@list"
+    },
+
+    "user_agent": {
+      "@id": "ipregistry:user_agent",
+      "@type": "@id"
+    },
+    "user_agent_header": {
+      "@id": "ipregistry:user_agent_header",
+      "@type": "xsd:string"
+    },
+    "user_agent_name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "user_agent_type": {
+      "@id": "ipregistry:user_agent_type",
+      "@type": "xsd:string"
+    },
+    "user_agent_version": {
+      "@id": "schema:softwareVersion",
+      "@type": "xsd:string"
+    },
+    "device": {
+      "@id": "ipregistry:device",
+      "@type": "@id"
+    },
+    "device_brand": {
+      "@id": "schema:brand",
+      "@type": "xsd:string"
+    },
+    "device_name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "device_type": {
+      "@id": "ipregistry:device_type",
+      "@type": "xsd:string"
+    },
+    "engine": {
+      "@id": "ipregistry:engine",
+      "@type": "@id"
+    },
+    "engine_name": {
+      "@id": "ipregistry:engine_name",
+      "@type": "xsd:string"
+    },
+    "engine_type": {
+      "@id": "ipregistry:engine_type",
+      "@type": "xsd:string"
+    },
+    "engine_version": {
+      "@id": "ipregistry:engine_version",
+      "@type": "xsd:string"
+    },
+    "os": {
+      "@id": "ipregistry:os",
+      "@type": "@id"
+    },
+    "os_name": {
+      "@id": "schema:operatingSystem",
+      "@type": "xsd:string"
+    },
+    "os_type": {
+      "@id": "ipregistry:os_type",
+      "@type": "xsd:string"
+    },
+    "os_version": {
+      "@id": "ipregistry:os_version",
+      "@type": "xsd:string"
+    }
+  }
+}
