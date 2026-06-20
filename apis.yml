@@ -9,7 +9,7 @@ description: >
   and optional EU-region routing for data residency compliance. All lookups are authenticated
   via API key and billed against prepaid credits that never expire.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/ipregistry/refs/heads/main/apis.yml
 created: '2026-06-12'
 modified: '2026-06-12'
@@ -34,7 +34,7 @@ apis:
       and abuse categories. Supports single lookups, batch requests of up to 1,024 IPs,
       user-agent parsing, and ASN lookups, with optional EU base URL for GDPR-aligned
       data routing.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://ipregistry.co
     baseURL: https://api.ipregistry.co
     tags:
