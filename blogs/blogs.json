@@ -4,8 +4,8 @@
   "url": "https://ipregistry.co/blog",
   "rss": null,
   "rss_confirmed": false,
-  "notes": "No RSS or Atom feed URL discovered on the blog page or via common feed paths (/blog/rss, /blog/feed, /feed, /blog/rss.xml). The blog is a static/custom site with no discoverable machine-readable feed.",
-  "last_checked": "2026-06-12",
+  "notes": "No RSS or Atom feed URL discoverable. Tried /blog/rss.xml (404) plus prior checks of /blog/rss, /blog/feed, /feed. HTML scrape of /blog surfaces only 3 posts, all from 2024 (pre-cutoff, already tracked). The blog is a static/custom site with no machine-readable feed.",
+  "last_checked": "2026-06-21",
   "posts": [
     {
       "title": "Wikimedia's Public DNS Resolver",
@@ -26,10 +26,13 @@
   "repo": "ipregistry",
   "feeds": [
     {
-      "source": "https://www.linkedin.com/company/ipregistry",
-      "error": "HTTPError"
+      "source": "https://ipregistry.co/blog",
+      "feed_url": "",
+      "saved": 0,
+      "method": "agent-scrape"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:48:41Z",
+  "agent_pulled": "2026-06-27"
 }

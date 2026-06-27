@@ -70,7 +70,7 @@ common:
     url: https://ipregistry.co/status
   - type: X
     url: https://twitter.com/ipregistryco
-  - type: Changelog
+  - type: ChangeLog
     url: https://ipregistry.co/changelog
   - type: Plans
     url: plans/ipregistry-plans-pricing.yml
