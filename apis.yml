@@ -54,6 +54,10 @@ apis:
         url: https://ipregistry.co/docs
         email: support@ipregistry.co
 common:
+  - type: VulnerabilityDisclosure
+    url: security/ipregistry-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/ipregistry-domain-security.yml
   - type: Website
     url: https://ipregistry.co
   - type: Documentation
