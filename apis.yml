@@ -9,7 +9,19 @@ description: >
   and optional EU-region routing for data residency compliance. All lookups are authenticated
   via API key and billed against prepaid credits that never expire.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ipregistry.png
 url: https://raw.githubusercontent.com/api-evangelist/ipregistry/refs/heads/main/apis.yml
 created: '2026-06-12'
 modified: '2026-06-12'
