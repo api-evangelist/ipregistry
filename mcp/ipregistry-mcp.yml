@@ -1,0 +1,33 @@
+generated: '2026-09-11'
+method: probed
+source: https://mcp.ipregistry.co/mcp
+status: published
+server:
+  name: ipregistry
+  transport: http
+  url: https://mcp.ipregistry.co/mcp
+deployment:
+  mode: remote
+  endpoint: https://mcp.ipregistry.co/mcp
+  verified: probed
+  probe: live
+  checked: '2026-09-11'
+  source: docs-check 2026-09-12 (endpoint found in the provider's own documentation, then probed)
+tools_count: 7
+tools:
+- name: ipregistry_lookup_ip
+  description: ''
+- name: ipregistry_geolocate_ip
+  description: ''
+- name: ipregistry_check_ip_security
+  description: ''
+- name: ipregistry_lookup_ip_network
+  description: ''
+- name: ipregistry_lookup_asn
+  description: ''
+- name: ipregistry_parse_user_agent
+  description: ''
+- name: ipregistry_my_ip
+  description: ''
+tools_source: live tools/list via initialize handshake, 2026-09-12 (signals/audit_mcp_authorship.py --probe)
+authorship: provider
