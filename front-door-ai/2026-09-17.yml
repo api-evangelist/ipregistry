@@ -1,0 +1,31 @@
+# Front Door AI Index — ipregistry — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: ipregistry
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: ipregistry.co
+  final_host: ipregistry.co
+  ownership: own
+  owner: ipregistry
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 6
+  host_score: 6
+  density: 5.26
+  words: 1140
+  tiers:
+    agentic: 4
+    core: 2
+    model: 0
+  ambiguous: 13
+  top_terms:
+    intelligence: 10
+    agent: 3
+    MCP: 2
+    AI agent: 1
+    AI: 1
+    LLMs: 1
+    model context protocol: 1
