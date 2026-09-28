@@ -16,18 +16,34 @@ deployment:
 tools_count: 7
 tools:
 - name: ipregistry_lookup_ip
-  description: ''
+  description: 'Look up complete intelligence for 1-1024 IPv4/IPv6 addresses in a single call: location
+    (country, region, city, coordinates, postal), network and company (ASN, organization, route, type),
+    mobile carrier, currency, time zone, and security si'
 - name: ipregistry_geolocate_ip
-  description: ''
+  description: 'Get the geographic location of 1-1024 IP addresses: continent, country, region, city,
+    postal code, coordinates, languages, and time zone with current local time. Returns only location
+    data - cheaper in tokens than ipregistry_lookup_ip. Cred'
 - name: ipregistry_check_ip_security
-  description: ''
+  description: 'Check security and anonymity signals for 1-1024 IP addresses: VPN, proxy, Tor / Tor exit,
+    relay (is_anonymous summarizes these), known abuser or attacker (is_threat summarizes these), bogon,
+    and cloud/hosting provider. Use it to assess frau'
 - name: ipregistry_lookup_ip_network
-  description: ''
+  description: 'Identify who operates 1-1024 IP addresses: ASN, organization, BGP route, connection type
+    (isp, hosting, business, education, government), the company using the IP, and the mobile carrier
+    (name, MCC, MNC) when applicable. Credits: 1 per unca'
 - name: ipregistry_lookup_asn
-  description: ''
+  description: 'Look up routing and registration data for 1-16 Autonomous Systems, given as numbers (13335)
+    or strings (''AS13335''): name, domain, country, type, regional registry, allocation date, announced
+    prefix counts, and relationships (peers, upstream'
 - name: ipregistry_parse_user_agent
-  description: ''
+  description: 'Parse 1-256 User-Agent header strings into structured data: agent name/type/version, device
+    brand and type, rendering engine, and operating system. Useful for log analysis and traffic classification.
+    Results are keyed by the original string'
 - name: ipregistry_my_ip
-  description: ''
+  description: Discover the public IP address this MCP session originates from and return its full intelligence
+    profile (location, network, security). On the hosted server this is the IP of the connected MCP client;
+    on a local stdio server it is the machi
 tools_source: live tools/list via initialize handshake, 2026-09-12 (signals/audit_mcp_authorship.py --probe)
 authorship: provider
+descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
+  --descriptions, 2026-09-28
