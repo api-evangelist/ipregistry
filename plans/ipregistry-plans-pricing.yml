@@ -120,3 +120,53 @@ plans:
       - Offline dataset licensing available
       - Custom rate limits
       - Multiple API key management
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - hybrid
+  - negotiated
+  units:
+  - credit
+  plans:
+  - name: Free Starter
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Starter Pack
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods: []
+  - name: Growth Pack
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods: []
+  - name: Business Pack
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods: []
+  - name: Scale Pack
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods: []
+  - name: Enterprise
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
