@@ -1,0 +1,1081 @@
+{
+  "endpoint": "https://mcp.ipregistry.co/mcp",
+  "captured": "2026-10-20",
+  "method": "initialize + tools/list (anonymous, no tool called; roadmap#992)",
+  "protocol_version": "2025-06-18",
+  "server_info": {
+    "name": "ipregistry",
+    "title": "Ipregistry IP Intelligence",
+    "version": "1.0.0"
+  },
+  "result": {
+    "tools": [
+      {
+        "name": "ipregistry_lookup_ip",
+        "title": "IP intelligence lookup",
+        "description": "Look up complete intelligence for 1-1024 IPv4/IPv6 addresses in a single call: location (country, region, city, coordinates, postal), network and company (ASN, organization, route, type), mobile carrier, currency, time zone, and security signals (VPN, proxy, Tor, relay, abuser, attacker, bogon, cloud provider). Prefer the focused ipregistry_geolocate_ip / ipregistry_check_ip_security / ipregistry_lookup_ip_network tools when one facet is enough, or pass the fields parameter to select exactly what you need. Credits: 1 per uncached target (+1 per call when more than one must be fetched); cached repeats are free.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "ips": {
+              "minItems": 1,
+              "maxItems": 1024,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "IPv4/IPv6 addresses to look up (1-1024). Duplicates are removed. Pass all targets in one call instead of looping."
+            },
+            "fields": {
+              "description": "Response field selection to reduce output size, e.g. 'location.country,security' or '**,-location.country.flag'. See the ipregistry://docs/response-fields resource for the full syntax and field list.",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "Resolve the reverse hostname of each IP (adds latency; off by default).",
+              "type": "boolean"
+            },
+            "page": {
+              "default": 1,
+              "description": "Result page (1-based). Later pages are served from cache at no credit cost.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "page_size": {
+              "default": 25,
+              "description": "Targets per page (1-1024). Large pages are only rejected when the serialized response exceeds the size limit, so raise this freely with narrow fields.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1024
+            }
+          },
+          "required": [
+            "ips"
+          ]
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {},
+              "description": "Successful lookups, keyed by requested target."
+            },
+            "errors": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "resolution": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message",
+                  "resolution"
+                ],
+                "additionalProperties": false
+              },
+              "description": "Per-target failures, keyed by requested target. Other targets still succeed."
+            },
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total_items": {
+                  "type": "number"
+                },
+                "page": {
+                  "type": "number"
+                },
+                "page_size": {
+                  "type": "number"
+                },
+                "total_pages": {
+                  "type": "number"
+                },
+                "has_more": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "total_items",
+                "page",
+                "page_size",
+                "total_pages",
+                "has_more"
+              ],
+              "additionalProperties": false
+            },
+            "usage": {
+              "type": "object",
+              "properties": {
+                "api_requests": {
+                  "type": "number"
+                },
+                "from_cache": {
+                  "type": "number"
+                },
+                "credits_consumed": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "credits_remaining": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "api_requests",
+                "from_cache",
+                "credits_consumed",
+                "credits_remaining"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "results",
+            "errors",
+            "pagination",
+            "usage"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "ipregistry_geolocate_ip",
+        "title": "IP geolocation",
+        "description": "Get the geographic location of 1-1024 IP addresses: continent, country, region, city, postal code, coordinates, languages, and time zone with current local time. Returns only location data - cheaper in tokens than ipregistry_lookup_ip. Credits: 1 per uncached target (+1 per call when more than one must be fetched); cached repeats are free.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "ips": {
+              "minItems": 1,
+              "maxItems": 1024,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "IPv4/IPv6 addresses (1-1024). Duplicates are removed. Pass all targets in one call instead of looping."
+            },
+            "page": {
+              "default": 1,
+              "description": "Result page (1-based). Later pages are served from cache at no credit cost.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "page_size": {
+              "default": 25,
+              "description": "Targets per page (1-1024). Large pages are only rejected when the serialized response exceeds the size limit, so raise this freely with narrow fields.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1024
+            }
+          },
+          "required": [
+            "ips"
+          ]
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {},
+              "description": "Successful lookups, keyed by requested target."
+            },
+            "errors": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "resolution": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message",
+                  "resolution"
+                ],
+                "additionalProperties": false
+              },
+              "description": "Per-target failures, keyed by requested target. Other targets still succeed."
+            },
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total_items": {
+                  "type": "number"
+                },
+                "page": {
+                  "type": "number"
+                },
+                "page_size": {
+                  "type": "number"
+                },
+                "total_pages": {
+                  "type": "number"
+                },
+                "has_more": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "total_items",
+                "page",
+                "page_size",
+                "total_pages",
+                "has_more"
+              ],
+              "additionalProperties": false
+            },
+            "usage": {
+              "type": "object",
+              "properties": {
+                "api_requests": {
+                  "type": "number"
+                },
+                "from_cache": {
+                  "type": "number"
+                },
+                "credits_consumed": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "credits_remaining": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "api_requests",
+                "from_cache",
+                "credits_consumed",
+                "credits_remaining"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "results",
+            "errors",
+            "pagination",
+            "usage"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "ipregistry_check_ip_security",
+        "title": "IP security & threat check",
+        "description": "Check security and anonymity signals for 1-1024 IP addresses: VPN, proxy, Tor / Tor exit, relay (is_anonymous summarizes these), known abuser or attacker (is_threat summarizes these), bogon, and cloud/hosting provider. Use it to assess fraud risk, filter bot traffic, or vet client IPs. Credits: 1 per uncached target (+1 per call when more than one must be fetched); cached repeats are free.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "ips": {
+              "minItems": 1,
+              "maxItems": 1024,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "IPv4/IPv6 addresses (1-1024). Duplicates are removed. Pass all targets in one call instead of looping."
+            },
+            "page": {
+              "default": 1,
+              "description": "Result page (1-based). Later pages are served from cache at no credit cost.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "page_size": {
+              "default": 25,
+              "description": "Targets per page (1-1024). Large pages are only rejected when the serialized response exceeds the size limit, so raise this freely with narrow fields.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1024
+            }
+          },
+          "required": [
+            "ips"
+          ]
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {},
+              "description": "Successful lookups, keyed by requested target."
+            },
+            "errors": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "resolution": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message",
+                  "resolution"
+                ],
+                "additionalProperties": false
+              },
+              "description": "Per-target failures, keyed by requested target. Other targets still succeed."
+            },
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total_items": {
+                  "type": "number"
+                },
+                "page": {
+                  "type": "number"
+                },
+                "page_size": {
+                  "type": "number"
+                },
+                "total_pages": {
+                  "type": "number"
+                },
+                "has_more": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "total_items",
+                "page",
+                "page_size",
+                "total_pages",
+                "has_more"
+              ],
+              "additionalProperties": false
+            },
+            "usage": {
+              "type": "object",
+              "properties": {
+                "api_requests": {
+                  "type": "number"
+                },
+                "from_cache": {
+                  "type": "number"
+                },
+                "credits_consumed": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "credits_remaining": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "api_requests",
+                "from_cache",
+                "credits_consumed",
+                "credits_remaining"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "results",
+            "errors",
+            "pagination",
+            "usage"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "ipregistry_lookup_ip_network",
+        "title": "IP network & ownership",
+        "description": "Identify who operates 1-1024 IP addresses: ASN, organization, BGP route, connection type (isp, hosting, business, education, government), the company using the IP, and the mobile carrier (name, MCC, MNC) when applicable. Credits: 1 per uncached target (+1 per call when more than one must be fetched); cached repeats are free.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "ips": {
+              "minItems": 1,
+              "maxItems": 1024,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "IPv4/IPv6 addresses (1-1024). Duplicates are removed. Pass all targets in one call instead of looping."
+            },
+            "page": {
+              "default": 1,
+              "description": "Result page (1-based). Later pages are served from cache at no credit cost.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "page_size": {
+              "default": 25,
+              "description": "Targets per page (1-1024). Large pages are only rejected when the serialized response exceeds the size limit, so raise this freely with narrow fields.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1024
+            }
+          },
+          "required": [
+            "ips"
+          ]
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {},
+              "description": "Successful lookups, keyed by requested target."
+            },
+            "errors": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "resolution": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message",
+                  "resolution"
+                ],
+                "additionalProperties": false
+              },
+              "description": "Per-target failures, keyed by requested target. Other targets still succeed."
+            },
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total_items": {
+                  "type": "number"
+                },
+                "page": {
+                  "type": "number"
+                },
+                "page_size": {
+                  "type": "number"
+                },
+                "total_pages": {
+                  "type": "number"
+                },
+                "has_more": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "total_items",
+                "page",
+                "page_size",
+                "total_pages",
+                "has_more"
+              ],
+              "additionalProperties": false
+            },
+            "usage": {
+              "type": "object",
+              "properties": {
+                "api_requests": {
+                  "type": "number"
+                },
+                "from_cache": {
+                  "type": "number"
+                },
+                "credits_consumed": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "credits_remaining": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "api_requests",
+                "from_cache",
+                "credits_consumed",
+                "credits_remaining"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "results",
+            "errors",
+            "pagination",
+            "usage"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "ipregistry_lookup_asn",
+        "title": "ASN lookup",
+        "description": "Look up routing and registration data for 1-16 Autonomous Systems, given as numbers (13335) or strings ('AS13335'): name, domain, country, type, regional registry, allocation date, announced prefix counts, and relationships (peers, upstreams, downstreams as AS numbers). Announced prefixes are omitted by default because large networks announce thousands; set include_prefixes=true to list them (capped at 100 per address family). Credits: 1 per uncached target (+1 per call when more than one must be fetched); cached repeats are free.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "asns": {
+              "minItems": 1,
+              "maxItems": 16,
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "description": "AS numbers to look up (1-16)."
+            },
+            "include_prefixes": {
+              "default": false,
+              "description": "Include announced IPv4/IPv6 prefixes (capped at 100 per family).",
+              "type": "boolean"
+            },
+            "page": {
+              "default": 1,
+              "description": "Result page (1-based). Later pages are served from cache at no credit cost.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "page_size": {
+              "default": 25,
+              "description": "Targets per page (1-1024). Large pages are only rejected when the serialized response exceeds the size limit, so raise this freely with narrow fields.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1024
+            }
+          },
+          "required": [
+            "asns"
+          ]
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {},
+              "description": "Successful lookups, keyed by requested target."
+            },
+            "errors": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "resolution": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message",
+                  "resolution"
+                ],
+                "additionalProperties": false
+              },
+              "description": "Per-target failures, keyed by requested target. Other targets still succeed."
+            },
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total_items": {
+                  "type": "number"
+                },
+                "page": {
+                  "type": "number"
+                },
+                "page_size": {
+                  "type": "number"
+                },
+                "total_pages": {
+                  "type": "number"
+                },
+                "has_more": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "total_items",
+                "page",
+                "page_size",
+                "total_pages",
+                "has_more"
+              ],
+              "additionalProperties": false
+            },
+            "usage": {
+              "type": "object",
+              "properties": {
+                "api_requests": {
+                  "type": "number"
+                },
+                "from_cache": {
+                  "type": "number"
+                },
+                "credits_consumed": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "credits_remaining": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "api_requests",
+                "from_cache",
+                "credits_consumed",
+                "credits_remaining"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "results",
+            "errors",
+            "pagination",
+            "usage"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "ipregistry_parse_user_agent",
+        "title": "User-Agent parser",
+        "description": "Parse 1-256 User-Agent header strings into structured data: agent name/type/version, device brand and type, rendering engine, and operating system. Useful for log analysis and traffic classification. Results are keyed by the original string. Credits: 1 per uncached target (+1 per call when more than one must be fetched); cached repeats are free.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "user_agents": {
+              "minItems": 1,
+              "maxItems": 256,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": "User-Agent strings to parse (1-256)."
+            },
+            "page": {
+              "default": 1,
+              "description": "Result page (1-based). Later pages are served from cache at no credit cost.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "page_size": {
+              "default": 25,
+              "description": "Targets per page (1-1024). Large pages are only rejected when the serialized response exceeds the size limit, so raise this freely with narrow fields.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1024
+            }
+          },
+          "required": [
+            "user_agents"
+          ]
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {},
+              "description": "Successful lookups, keyed by requested target."
+            },
+            "errors": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "resolution": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message",
+                  "resolution"
+                ],
+                "additionalProperties": false
+              },
+              "description": "Per-target failures, keyed by requested target. Other targets still succeed."
+            },
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total_items": {
+                  "type": "number"
+                },
+                "page": {
+                  "type": "number"
+                },
+                "page_size": {
+                  "type": "number"
+                },
+                "total_pages": {
+                  "type": "number"
+                },
+                "has_more": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "total_items",
+                "page",
+                "page_size",
+                "total_pages",
+                "has_more"
+              ],
+              "additionalProperties": false
+            },
+            "usage": {
+              "type": "object",
+              "properties": {
+                "api_requests": {
+                  "type": "number"
+                },
+                "from_cache": {
+                  "type": "number"
+                },
+                "credits_consumed": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "credits_remaining": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "api_requests",
+                "from_cache",
+                "credits_consumed",
+                "credits_remaining"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "results",
+            "errors",
+            "pagination",
+            "usage"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "ipregistry_my_ip",
+        "title": "My IP",
+        "description": "Discover the public IP address this MCP session originates from and return its full intelligence profile (location, network, security). On the hosted server this is the IP of the connected MCP client; on a local stdio server it is the machine's public egress IP. Costs 1 credit (cached repeats are free).",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "fields": {
+              "description": "Response field selection to reduce output size, e.g. 'location.country,security' or '**,-location.country.flag'. See the ipregistry://docs/response-fields resource for the full syntax and field list.",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "Resolve the reverse hostname of each IP (adds latency; off by default).",
+              "type": "boolean"
+            }
+          }
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {},
+              "description": "IP intelligence profile of the caller."
+            },
+            "usage": {
+              "type": "object",
+              "properties": {
+                "api_requests": {
+                  "type": "number"
+                },
+                "from_cache": {
+                  "type": "number"
+                },
+                "credits_consumed": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "credits_remaining": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "api_requests",
+                "from_cache",
+                "credits_consumed",
+                "credits_remaining"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "result",
+            "usage"
+          ],
+          "additionalProperties": false
+        }
+      }
+    ]
+  }
+}
