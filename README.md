@@ -1,4 +1,4 @@
-# IPregistry (ipregistry)
+# IPregistry
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,82 +64,121 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-IPregistry provides a fast, reliable IP geolocation and threat intelligence REST API for looking up information associated with IPv4 or IPv6 addresses and Autonomous System Numbers (ASN). The API returns location data, connection details, company and carrier information, time zone, currency, and comprehensive security threat assessments drawn from over 220 OSINT threat feeds. It supports single and batch IP lookups (up to 1,024 IPs per request), user-agent parsing, ASN queries, and optional EU-region routing for GDPR-aligned data residency. All lookups are authenticated via API key and billed against prepaid credits that never expire. IPregistry is operated by Elaunira SARL, based in France.
+IPregistry provides a fast, reliable IP geolocation and threat intelligence REST API for looking up information associated with IPv4 or IPv6 addresses and Autonomous Systems (AS). The API returns location data, connection details, company and carrier information, time zone, currency, and comprehensive security threat assessments from over 220 OSINT threat feeds. It supports single and batch IP lookups, user-agent parsing, ASN queries, and optional EU-region routing for data residency compliance. All lookups are authenticated via API key and billed against prepaid credits that never expire.
 
-APIs.json: https://raw.githubusercontent.com/api-evangelist/ipregistry/refs/heads/main/apis.yml
+**Areas:** IP Geolocation · Threat Intelligence · IP Address · ASN · Carrier · Security · Location Data · User-Agent Parsing · VPN Detection · Proxy Detection
 
-Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=ipregistry-api-evangelist&utm_content=repo
+## IPregistry on APIs.io
 
-## Tags
+Everything profiled for IPregistry is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ipregistry/](https://apis.io/providers/ipregistry/)** — or go straight to one of the APIs or properties below.
 
-- IP Geolocation
-- Threat Intelligence
-- IP Address
-- ASN
-- Carrier
-- Security
-- Location Data
-- User-Agent Parsing
-- VPN Detection
-- Proxy Detection
+### APIs (1)
 
-## APIs
+- [IPregistry IP Geolocation and Threat Intelligence API](https://apis.io/apis/ipregistry/ipregistry-ip-geolocation-and-threat-intelligence-api/) — A REST API that resolves IPv4/IPv6 addresses and Autonomous System Numbers to rich intelligence including geolocation, ISP/carrier details, company data,…
 
-### IPregistry IP Geolocation and Threat Intelligence API
+### Published properties
 
-A REST API that resolves IPv4/IPv6 addresses and Autonomous System Numbers to rich intelligence including geolocation, ISP/carrier details, company data, currency and time zone, and threat classification across VPN, proxy, TOR, bot, and abuse categories. Supports single lookups, batch requests of up to 1,024 IPs, user-agent parsing, and ASN lookups, with an optional EU base URL for GDPR-aligned data routing.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- Base URL: https://api.ipregistry.co
-- Documentation: https://ipregistry.co/docs
+#### MCP servers (1)
 
-## Plans, Rate Limits, and FinOps
+Model Context Protocol servers that expose the API to agents.
 
-### Plans
+- [ipregistry](https://apis.io/servers/ipregistry/ipregistry/)
 
-IPregistry uses a prepaid credit model with no monthly fees and no credit expiration. New accounts receive 100,000 free credits on sign-up.
+#### JSON-LD (1)
 
-| Plan | Credits | Price | Per-Credit Cost |
-|------|---------|-------|-----------------|
-| Free Starter | 100,000 | $0 (one-time) | $0.0000 |
-| Starter Pack | 50,000 | $10 | $0.0002 |
-| Growth Pack | 400,000 | $50 | $0.000125 |
-| Business Pack | 1,000,000 | $100 | $0.0001 |
-| Scale Pack | 6,000,000 | $500 | ~$0.0000833 |
-| Enterprise | Custom | Custom/month | Negotiated |
+Linked-data contexts for the provider's vocabulary.
 
-Full plan details: [plans/ipregistry-plans-pricing.yml](plans/ipregistry-plans-pricing.yml)
+- [Ipregistry Context](https://apis.io/jsonld/ipregistry/ipregistry-context/)
 
-### Rate Limits
+#### Security (2)
 
-Rate limiting is not enforced by default. The account's credit balance is the primary constraint. Optional hourly invocation limits can be configured per API key in the dashboard. Batch requests are capped at 1,024 IPs, 16 ASNs, or 256 user-agent strings per request.
+Authentication, trust centre, and vulnerability disclosure.
 
-Full rate limit details: [rate-limits/ipregistry-rate-limits.yml](rate-limits/ipregistry-rate-limits.yml)
+- [Ipregistry Domain Security](https://apis.io/security/ipregistry/ipregistry-domain-security/)
+- [Ipregistry Vulnerability Disclosure](https://apis.io/security/ipregistry/ipregistry-vulnerability-disclosure/)
 
-### FinOps
+#### Plans and pricing (1)
 
-Each lookup costs 1 credit; batch requests cost (n + 1) credits. Cost per credit decreases with larger pack purchases. Spend controls include per-key hourly limits, low-balance alerts, and auto-renewal thresholds, all configurable from the dashboard.
+Published plans, tiers and prices.
 
-Full FinOps details: [finops/ipregistry-finops.yml](finops/ipregistry-finops.yml)
+- [Ipregistry Plans Pricing](https://apis.io/plans/ipregistry/ipregistry-plans-pricing/)
 
-## Timestamps
+#### Rate limits (1)
 
-- Created: 2026-06-12
-- Modified: 2026-06-12
+Published request limits.
 
-## Common
+- [Ipregistry Rate Limits](https://apis.io/rate-limits/ipregistry/ipregistry-rate-limits/)
 
-| Type | URL |
-|------|-----|
-| Website | https://ipregistry.co |
-| Documentation | https://ipregistry.co/docs |
-| GitHub Org | https://github.com/ipregistry |
-| LinkedIn | https://www.linkedin.com/company/ipregistry |
-| Blog | https://ipregistry.co/blog |
-| Pricing | https://ipregistry.co/pricing |
-| Status Page | https://ipregistry.co/status |
-| X (Twitter) | https://twitter.com/ipregistryco |
-| Changelog | https://ipregistry.co/changelog |
+#### FinOps (1)
 
-## Maintainers
+What the API costs to run, by operation.
 
-- Kin Lane — kin@apievangelist.com
+- [Ipregistry Finops](https://apis.io/finops/ipregistry/ipregistry-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://ipregistry.co)
+- [Documentation](https://ipregistry.co/docs)
+- [Pricing](https://ipregistry.co/pricing)
+- [Changelog](https://ipregistry.co/changelog)
+- [Blog](https://ipregistry.co/blog)
+- [Status](https://ipregistry.co/status)
+
+## API Evangelist rating
+
+**Kin Score 27.8** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 34.7 |
+| Contract governance | 0.0 |
+| Operational transparency | 55.3 |
+| Developer ergonomics | 11.9 |
+| Access clarity | 18.4 |
+
+**Agent readiness 22.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 14.2** — Telecommunications
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ipregistry/](https://apis.io/providers/ipregistry/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for IPregistry: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ipregistry/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
